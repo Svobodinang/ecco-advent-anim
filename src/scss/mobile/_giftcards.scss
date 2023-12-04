@@ -1,0 +1,316 @@
+@use "sass:math";
+
+$baseW: 375;
+$fs: 12;
+
+@function vw($px) {
+  @return #{math.div(100 * $px, $baseW)}vw;
+}
+
+@function em($px, $baseFs) {
+  @return #{math.div($px, $baseFs)}em;
+}
+
+.giftcards {
+  padding: 0 20px;
+  padding-bottom: 60px;
+  position: relative;
+  gap: em(16, $fs);
+  font-size: vw($fs);
+  display: flex;
+  flex-direction: column;
+
+  &__line {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: em(16, $fs);
+    align-items: flex-end;
+
+    &--2 {
+      margin-top: em(-171 - 16, $fs);;
+    }
+
+    &--3 {
+      margin-top: em(-75, $fs);;
+    }
+  }
+
+  &__item {
+    position: relative;
+    transition: transform 0.35s ease-in-out;
+    transform-origin: center center;
+
+    &.gift-exist {
+      transition: transform 0.35s ease-in-out;
+    }
+
+    .front,
+    .back {
+      overflow: hidden;
+      backface-visibility: hidden;
+      position: absolute;
+      transition: transform .8s ease-in-out;
+      border-radius: em(11, $fs);
+      width: 100%;
+      height: 100%;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center center;
+    }
+
+    .back {
+      position: static;
+    }
+    .back{
+      transform: perspective(600px) rotateY(0deg);
+    }
+    .front{
+      transform: perspective(600px) rotateY(180deg);
+    }
+
+    &.gift-exist {
+      cursor: pointer;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+
+      &.show-front {
+        .front{
+          transform: perspective(600px) rotateY(0deg);
+        }
+
+        .back{
+          transform: perspective(600px) rotateY(-180deg);
+        }
+      }
+
+      @keyframes bshanim {
+        from {
+          box-shadow: 0px 0px 15px 0 #FFF;
+        }
+  
+        to {
+          box-shadow: 0px 0px 30px 0 #FFF;
+        }
+      }
+
+      &.active {
+        .front,
+        .back {
+          box-shadow: 0px 0px 30px 0 #FFF;
+          animation: bshanim 0.8s ease-in-out infinite alternate;
+        }
+      }
+    }
+  }
+
+  .giftcards__tooltip {
+    display: none;
+  }
+  .december-14 .giftcards__tooltip,
+  .december-18 .giftcards__tooltip,
+  .december-21 .giftcards__tooltip,
+  .december-24 .giftcards__tooltip {
+    right: 50%;
+    left: auto;
+  }
+
+  .december {
+    @for $i from 11 to 25 {
+      &-#{$i} {
+      .front {
+        background-image: url('../../images/december-#{$i}-m.svg?inline');
+      }
+  
+      .back {
+        background-image: url('../../images/december-#{$i}-hide-m.svg?inline');
+      }
+      }
+    }
+  }
+
+  .december-11 {
+    // flex-basis: 177px;
+    // align-self: flex-end;
+    // margin: 0 15px 0 0;
+    height: em(118, $fs);
+    width: em(162, $fs);
+  }
+  .december-12 {
+    // flex-basis: 133px;
+    height: em(133, $fs);
+    width: em(133, $fs);
+  }
+  .december-13 {
+    // flex-basis: 152px;
+    // margin: 16px 0 0;
+    // padding: 0 16px 0 0;
+    width: em(136, $fs);
+    height: em(277, $fs);
+  }
+  .december-14 {
+    // flex-basis: 183px;
+    // margin: 16px 0 0;
+    width: em(183, $fs);
+    height: em(91, $fs);
+    align-self: flex-start;
+  }
+  .december-15 {
+    // flex-basis: 170px;
+    // margin: -167px 0 0 140px;
+    width: em(170, $fs);
+    height: em(171, $fs);
+    margin-left: auto;
+    margin-right: em(15, $fs);
+  }
+  .december-16 {
+    // flex-basis: 311px;
+    // margin: 19px 0 17px 0;
+    width: em(312, $fs);
+    height: em(137, $fs);
+  }
+  .december-17 {
+    // flex-basis: 163px;
+    // padding: 0 8px 0 0;
+    width: em(147, $fs);
+    height: em(123, $fs);
+    align-self: flex-start;
+  }
+  .december-18 {
+    // flex-basis: 172px;
+    // margin: 0 0 12px;
+    // padding: 0 0 0 8px;
+    width: em(172, $fs);
+    height: em(204, $fs);
+  }
+  .december-19 {
+    // flex-basis: 137px;
+    // margin: -60px 0 0 0;
+    // padding: 0 12px 0 0;
+    width: em(137, $fs);
+    height: em(215, $fs);
+  }
+  .december-20 {
+    // flex-basis: 159px;
+    // padding: 0 0 0 4px;
+    width: em(159, $fs);
+    height: em(140, $fs);
+  }
+  .december-21 {
+    // flex-basis: 335px;
+    // margin: 16px 0;
+    width: em(335, $fs);
+    height: em(106, $fs);
+  }
+  .december-22 {
+    // flex-basis: 156px;
+    // padding: 0 8px 0 0;
+    width: em(147, $fs);
+    height: em(90, $fs);
+    align-self: flex-start;
+  }
+  .december-23 {
+    // flex-basis: 155px;
+    // padding: 0 0 0 8px;
+    width: em(147, $fs);
+    height: em(136, $fs);
+  }
+  .december-24 {
+    // flex-basis: 148px;
+    // margin: -35px auto 60px 4%;
+    width: em(147, $fs);
+    height: em(100, $fs);
+    margin-right: auto;
+    margin-top: em(-32 - 16, $fs);
+    margin-left: em(12, $fs);
+  }
+  // @media screen and (max-width: 430px) {
+  //   .december-24 {
+  //     margin-left: 10%;
+  //   }
+  // }
+  // @media screen and (max-width: 414px) {
+  //   .december-24 {
+  //     margin-left: 8.5%;
+  //   }
+  // }
+  // @media screen and (max-width: 390px) {
+  //   .december-24 {
+  //     margin-left: 6%;
+  //   }
+  // }
+  // @media screen and (max-width: 375px) {
+  //   .december-24 {
+  //     margin-left: 4%;
+  //   }
+  // }
+  // @media screen and (max-width: 360px) {
+  //   margin: 0;
+  //   .december-13 {
+  //     flex-basis: 145px;
+  //   }
+  //   .december-14 {
+  //     flex-basis: 175px;
+  //   }
+  //   .december-17 {
+  //     flex-basis: 155px;
+  //   }
+  //   .december-18 {
+  //     flex-basis: 165px;
+  //   }
+  //   .december-24 {
+  //     margin-left: 1.5%;
+  //   }
+  // }
+  // @media screen and (max-width: 320px) {
+  //   margin-top: 50px;
+  //   .december-11 {
+  //     flex-basis: 150px;
+  //   }
+  //   .december-12 {
+  //     flex-basis: 120px;
+  //   }
+  //   .december-13 {
+  //     flex-basis: 135px;
+  //   }
+  //   .december-14 {
+  //     flex-basis: 145px;
+  //   }
+  //   .december-15 {
+  //     flex-basis: 150px;
+  //     margin: -151px 0 0 137px;
+  //   }
+  //   .december-16 {
+  //     flex-basis: 311px;
+  //   }
+  //   .december-17 {
+  //     flex-basis: 140px;
+  //   }
+  //   .december-18 {
+  //     flex-basis: 140px;
+  //   }
+  //   .december-19 {
+  //     flex-basis: 125px;
+  //     margin: -45px 0 0 0;
+  //   }
+  //   .december-20 {
+  //     flex-basis: 150px;
+  //   }
+  //   .december-21 {
+  //     flex-basis: 335px;
+  //   }
+  //   .december-22 {
+  //     flex-basis: 140px;
+  //   }
+  //   .december-23 {
+  //     flex-basis: 140px;
+  //   }
+  //   .december-24 {
+  //     flex-basis: 140px;
+  //     margin: -25px auto 60px 0;
+  //     padding-right: 8px;
+  //   }
+  // }
+}

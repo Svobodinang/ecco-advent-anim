@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css?family=Mulish:200,300,800&display=swap&subset=cyrillic');
+
+@mixin fontMulish($weight) {
+    @if $weight == 400 {
+        font-family: Mulish-Regular, sans-serif;
+    }
+    @else if $weight == 700 {
+        font-family: Mulish-Bold, sans-serif;
+    }
+    @else if $weight == 200 {
+        font-family: Mulish, sans-serif;
+        font-weight: 200;
+    }
+    @else if $weight == 300 {
+        font-family: Mulish, sans-serif;
+        font-weight: 300;
+    }
+    @else if $weight == 800 {
+        font-family: Mulish, sans-serif;
+        font-weight: 800;
+    }
+}
+
+body.featured-collections {
+    .i-content {
+        padding: 0;
+    }
+    .header-b {
+        display: none;
+    }
+    .gotoup ~ noindex {
+        display: none;
+    }
+    .promo-content {
+        background: #2B714F;
+        color: #000000;
+        position: relative;
+        text-align: left;
+        @include fontMulish(400);
+        @import "header-block";
+        @import "giftcards";
+        @import "popup-advent";
+        .slick-arrow {
+            display: none;
+            &:before {
+                content: none;
+            }
+            &.slick-next {
+                right: 0;
+            }
+            &.slick-prev {
+                left: 0;
+                transform: translateY(-50%) rotate(180deg);
+            }
+        }
+        .slick-disabled {
+            opacity: 0;
+            pointer-events:none;
+        }
+        .slick-dots {
+            bottom: 7rem;
+            li {
+                background: rgba(119, 119, 118, 0.3);
+                border-radius: 100%;
+                margin-right: .5rem;
+                height: .7rem;
+                width: .7rem;
+                &.slick-active {
+                    background: #8F8F8F;
+                }
+                button:before {
+                    content: none;
+                }
+            }
+        }
+        .goods-block {
+            margin: 0 auto 2rem;
+            .goods {
+                font-size: 0;
+                line-height: 0;
+                margin-bottom: 2rem;
+            }
+            &__good {
+                color: #181818;
+                display: inline-block;
+                @include fontMulish(700);
+                font-size: 1.6rem;
+                line-height: 2.4rem;
+                letter-spacing: 0.01em;
+                padding: 0 2.5rem;
+                text-align: center;
+                text-decoration: none;
+                text-transform: uppercase;
+                width: 25%;
+            }
+            &__title {
+                font-size: 1.5rem;
+                line-height: 2.2rem;
+                margin-bottom: 1.2rem;
+            }
+            &__img {
+                margin-bottom: 2.6rem;
+            }
+            &__btn {
+                background: #181818;
+                border: 1px solid #181818;
+                color: #FFFFFF;
+                display: block;
+                @include fontMulish(700);
+                font-size: 1.4rem;
+                line-height: 4.4rem;
+                letter-spacing: 0.01em;
+                margin: 0 auto 11.5rem;
+                text-align: center;
+                text-decoration: none;
+                text-transform: uppercase;
+                height: 4.4rem;
+                width: 19rem;
+                &:hover {
+                    background: #FFFFFF;
+                    border: 1px solid #181818;
+                    color: #181818;
+                }
+            }
+        }
+        .bg-popup {
+            background: rgba(0, 0, 0, 0.40);
+            display: none;
+            position: fixed;
+            bottom: 0;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+        }
+    }
+    &.in-popup-advent {
+        overflow: hidden;
+        .bg-popup {
+            display: block;
+        }
+        .popup-advent--show {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+    #subscribe-form {
+        margin-bottom: 2.1rem;
+    }
+}

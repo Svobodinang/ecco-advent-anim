@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:200,300,500&display=swap&subset=cyrillic');
+@import url('https://fonts.googleapis.com/css?family=Mulish:500&display=swap&subset=cyrillic');
+
+@mixin fontMulish($weight) {
+    @if $weight == 400 {
+        font-family: Mulish-Regular, sans-serif;
+    }
+    @else if $weight == 500 {
+        font-family: Mulish, sans-serif;
+        font-weight: 500;
+    }
+    @else if $weight == 700 {
+        font-family: Mulish-Bold, sans-serif;
+    }
+    @else if $weight == 800 {
+        font-family: Mulish, sans-serif;
+        font-weight: 800;
+    }
+}
+@mixin fontMontserrat($weight) {
+    @if $weight == 200 {
+        font-family: Montserrat, sans-serif;
+        font-weight: 200;
+    }
+    @else if $weight == 300 {
+        font-family: Montserrat, sans-serif;
+        font-weight: 300;
+    }
+    @else if $weight == 500 {
+        font-family: Montserrat, sans-serif;
+        font-weight: 500;
+    }
+}
+
+body.featured-collections {
+    .promo-content {
+        background: #2B714F;
+        color: #181818;
+        position: relative;
+        overflow: hidden;
+        @include fontMulish(400);
+        img {
+            width: 100%;
+        }
+        .z-12 {
+            z-index: 12 !important;
+        }
+        @import "header-block";
+        @import "giftcards";
+        @import "popup-advent";
+        .slick-arrow {
+            background: url("/promos/ss22/bts/dist/images/carousel-arrow-right.svg");
+            border: 0;
+            cursor: pointer;
+            font-size: 0;
+            display: inline-block;
+            position: absolute;
+            top: 65%;
+            height: 35px;
+            width: 20px;
+            z-index: 5;
+        }
+        .slick-prev {
+            left: 0;
+            transform: translateY(-65%) rotate(180deg);
+        }
+        .slick-next {
+            right: 0;
+            transform: translateY(-65%);
+        }
+        .slick-dots {
+            cursor: pointer;
+            position: absolute;
+            bottom: 0;
+            text-align: center;
+            width: 100%;
+            li {
+                border-radius: 7px;
+                display: inline-block;
+                margin: 0 5px;
+                padding: 2px;
+                width: 7px;
+                height: 7px;
+                button {
+                    border: 0;
+                    border-radius: 100%;
+                    cursor: pointer;
+                    display: inline-block;
+                    font-size: 0;
+                    height: 7px;
+                    width: 7px;
+                }
+            }
+            .slick-active {
+                button {
+                    background: #181818;
+                }
+            }
+        }
+        .bg-popup {
+            background: rgba(0, 0, 0, 0.40);
+            position: fixed;
+            bottom: 0;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.35s ease;
+        }
+    }
+    &.in-popup-advent {
+        overflow: hidden;
+
+        .bg-popup {
+            opacity: 1;
+            pointer-events: all;
+        }
+    }
+}

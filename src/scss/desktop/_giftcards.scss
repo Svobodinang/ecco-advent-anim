@@ -1,0 +1,360 @@
+@use "sass:math";
+
+$baseW: 1920;
+$fs: 12;
+
+@function vw($px) {
+  @return #{math.div(100 * $px, $baseW)}vw;
+}
+
+@function em($px, $baseFs) {
+  @return #{math.div($px, $baseFs)}em;
+}
+
+.giftcards {
+  margin: -190px auto 92px;
+  // margin: -190px auto 90px;
+  max-width: em(1366, $fs);
+  // padding: 0 5px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: em(35, $fs);
+  font-size: vw($fs);
+
+  @media screen and (max-width: 1440px) {
+    font-size: vw($fs * 1.2);
+  }
+
+  @media screen and (max-width: 1000px) {
+    font-size: vw($fs * 1.35);
+  }
+
+  &__line {
+    display: flex;
+    gap: em(35, $fs);
+
+    &--1 {
+      align-items: flex-end;
+    }
+
+    &--4 {
+      margin-top: em(-263, $fs);
+    }
+  }
+
+  &__item {
+    position: relative;
+    transition: transform 0.35s ease-in-out;
+    transform-origin: center center;
+
+    &.gift-exist {
+      transition: transform 0.35s ease-in-out;
+    }
+
+    .front,
+    .back {
+      overflow: hidden;
+      backface-visibility: hidden;
+      position: absolute;
+      transition: transform .8s ease-in-out;
+      border-radius: em(24, $fs);
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+    }
+
+    .back {
+      position: static;
+    }
+    .back{
+      transform: perspective(600px) rotateY(0deg);
+    }
+    .front{
+      transform: perspective(600px) rotateY(180deg);
+    }
+
+    &.gift-exist {
+      cursor: pointer;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+
+      &.show-front {
+        .front{
+          transform: perspective(600px) rotateY(0deg);
+        }
+
+        .back{
+          transform: perspective(600px) rotateY(-180deg);
+        }
+      }
+    }
+
+    @keyframes bshanim {
+      from {
+        box-shadow: 0px 0px 15px 0 #FFF;
+      }
+
+      to {
+        box-shadow: 0px 0px 30px 0 #FFF;
+      }
+    }
+
+    &.active {
+      .front,
+      .back {
+        box-shadow: 0px 0px 30px 0 #FFF;
+        animation: bshanim 0.8s ease-in-out infinite alternate;
+      }
+    }
+  }
+
+  .giftcards__tooltip {
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.80);
+    font-size: 18px;
+    line-height: 22px;
+    max-width: 340px;
+    opacity: 0;
+    padding: 20px;
+    position: absolute;
+    left: 50%;
+    top: 25%;
+    visibility: hidden;
+    transition: all .2s ease-in-out;
+    width: 100%;
+    z-index: 1;
+    &:hover {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+  .december-14 .giftcards__tooltip,
+  .december-18 .giftcards__tooltip,
+  .december-21 .giftcards__tooltip,
+  .december-24 .giftcards__tooltip {
+    right: 50%;
+    left: auto;
+  }
+
+  .december {
+    @for $i from 11 to 25 {
+      &-#{$i} {
+      .front {
+        background-image: url('../../images/december-#{$i}.svg?inline');
+      }
+  
+      .back {
+        background-image: url('../../images/december-#{$i}-hide.svg?inline');
+      }
+      }
+    }
+  }
+
+  .december-11 {
+    // flex-basis: 424px;
+    // margin: 26px 0 35px;
+    width: em(358, $fs);
+    height: em(273, $fs);
+    margin-left: em(33, $fs);
+  }
+  .december-12 {
+    // flex-basis: 321px;
+    // margin: 0 0 35px 0;
+    width: em(286, $fs);
+    height: em(286, $fs);
+  }
+  .december-13 {
+    // flex-basis: 279px;
+    // margin: 26px 0 35px 0;
+    width: em(244, $fs);
+    height: em(394, $fs);
+    margin-bottom: em(-134, $fs);
+  }
+  .december-14 {
+    // flex-basis: 328px;
+    // margin-top: 120px;
+    width: em(328, $fs);
+    height: em(164, $fs);
+  }
+  .december-15 {
+    // flex-basis: 311px;
+    // margin: -135px 0 35px;
+    width: em(276, $fs);
+    height: em(338, $fs);
+  }
+  .december-16 {
+  //   flex-basis: 436px;
+  //   margin: -135px 0 35px 0;
+    width: em(401, $fs);
+    height: em(176, $fs);
+  }
+  .december-17 {
+    // flex-basis: 279px;
+    // margin: 0 0 35px 0;
+    width: em(244, $fs);
+    height: em(204, $fs);
+    margin-top: em(134, $fs);
+  }
+  .december-18 {
+    // flex-basis: 321px;
+    // margin: -135px 0 35px;
+    width: em(286, $fs);
+    height: em(338, $fs);
+  }
+  .december-19 {
+    // flex-basis: 313px;
+    // margin: 0;
+    width: em(243, $fs);
+    height: em(455, $fs);
+    margin-left: em(33, $fs);
+  }
+  .december-20 {
+    // flex-basis: 436px;
+    // margin: -165px 0 35px 0;
+    width: em(401, $fs);
+    height: em(354, $fs);
+    margin-top: em(-162, $fs);
+  }
+  .december-21 {
+    // flex-basis: 607px;
+    width: em(607, $fs);
+    height: em(192, $fs);
+  }
+  .december-22 {
+    // flex-basis: 334px;
+    // margin: -230px 0 0 310px;
+    width: em(299, $fs);
+    height: em(182, $fs);
+    margin-left: em(311, $fs);
+  }
+  .december-23 {
+    // flex-basis: 332px;
+    // margin: -230px 0 0 0;
+    width: em(297, $fs);
+    height: em(275, $fs);
+  }
+  .december-24 {
+    // flex-basis: 335px;
+    // margin: -230px 0 0 0;
+    width: em(335, $fs);
+    height: em(228, $fs);
+  }
+  // @media screen and (max-width: 1365px) {
+  //   .december-11 {
+
+  //   }
+  //   .december-12 {
+
+  //   }
+  //   .december-13 {
+
+  //   }
+  //   .december-14 {
+
+  //   }
+  //   .december-15 {
+
+  //   }
+  //   .december-16 {
+
+  //   }
+  //   .december-17 {
+
+  //   }
+  //   .december-18 {
+
+  //   }
+  //   .december-19 {
+
+  //   }
+  //   .december-20 {
+
+  //   }
+  //   .december-21 {
+
+  //   }
+  //   .december-22 {
+
+  //   }
+  //   .december-23 {
+
+  //   }
+  //   .december-24 {
+
+  //   }
+  // }
+  // @media screen and (max-width: 1300px) {
+  //   .december-14 {
+  //     margin-top: 100px;
+  //   }
+  //   .december-15 {
+  //     margin: -105px 0 35px;
+  //   }
+  //   .december-16 {
+  //     margin: -105px 0 35px;
+  //   }
+  //   .december-18 {
+  //     margin: -105px 0 35px;
+  //   }
+  //   .december-22 {
+  //     margin: -210px 0 0 295px;
+  //   }
+  //   .december-23 {
+  //     margin: -210px 0 0 0;
+  //   }
+  //   .december-24 {
+  //     margin: -210px 0 0 0;
+  //   }
+  // }
+  // @media screen and (max-width: 1200px) {
+  //   .december-14 {
+  //     margin-top: 100px;
+  //   }
+  //   .december-15 {
+  //     margin: -105px 0 35px;
+  //   }
+  //   .december-16 {
+  //     margin: -105px 0 35px;
+  //   }
+  //   .december-18 {
+  //     margin: -105px 0 35px;
+  //   }
+  //   .december-22 {
+  //     margin: -190px 0 0 24%;
+  //   }
+  //   .december-23 {
+  //     margin: -170px 0 0 0;
+  //   }
+  //   .december-24 {
+  //     margin: -170px 0 0 0;
+  //   }
+  // }
+  // @media screen and (max-width: 1024px) {
+  //   .december-14 {
+  //     margin-top: 80px;
+  //   }
+  //   .december-15 {
+  //     margin: -105px 0 35px;
+  //   }
+  //   .december-16 {
+  //     margin: -105px 0 35px;
+  //   }
+  //   .december-18 {
+  //     margin: -105px 0 35px;
+  //   }
+  //   .december-22 {
+  //     margin: -200px 0 0 240px;
+  //   }
+  //   .december-23 {
+  //     margin: -160px 0 0 0;
+  //   }
+  //   .december-24 {
+  //     margin: -160px 0 0 0;
+  //   }
+  // }
+}

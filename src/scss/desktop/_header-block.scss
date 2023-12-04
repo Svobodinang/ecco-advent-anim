@@ -1,0 +1,229 @@
+@use "sass:math";
+
+$baseW: 1921;
+$fs: 12;
+
+@function vw($px) {
+  @return #{math.div(100 * $px, $baseW)}vw;
+}
+
+@function em($px, $baseFs) {
+  @return #{math.div($px, $baseFs)}em;
+}
+
+.header-block {
+  padding: 0;
+  position: relative;
+  margin: 0 auto 50px;
+  max-width: 1920px;
+  display: flex;
+  justify-content: center;
+
+  &__decor-box {
+    width: 1921px;
+    height: 704px;
+    flex-shrink: 0;
+    position: relative;
+
+    .header-decor {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      overflow: visible;
+
+      &--no-anim {
+        background-image: url('../../images/header-no-anim.svg?inline');
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
+
+      @keyframes snowflake-anim {
+        from {
+          opacity: 0;
+          transform: translateY(var(--y-from));
+        }
+
+        50% {
+          opacity: 1;
+        }
+
+        to {
+          opacity: 0;
+          transform: translateY(var(--y-to));
+        }
+      }
+
+      &--snowflakes {
+        .snowflake {
+          animation: snowflake-anim 2s linear infinite;
+
+          @for $i from 1 to 11 {
+            &--#{$i} {
+              animation-delay: calc(-0.1s * #{$i});
+            }
+          }
+
+          &--1,
+          &--10 {
+            --y-from: 0;
+            --y-to: 20%;
+          }
+
+          &--8 {
+            --y-from: -10%;
+            --y-to: 10%;
+          }
+
+          &--3 {
+            --y-from: -20%;
+            --y-to: 0%;
+          }
+
+          &--2 {
+            --y-from: -10%;
+            --y-to: 10%;
+          }
+
+          &--6 {
+            --y-from: -30%;
+            --y-to: 0%;
+          }
+
+          &--4 {
+            --y-from: -20%;
+            --y-to: 20%;
+          }
+
+          &--5 {
+            --y-from: -20%;
+            --y-to: 10%;
+          }
+
+          &--7 {
+            --y-from: -40%;
+            --y-to: 0%;
+          }
+
+          &--9 {
+            --y-from: 0%;
+            --y-to: 30%;
+          }
+        }
+      }
+
+      &--stars {
+        @keyframes star-anim {
+          from {
+            opacity: 0;
+          }
+
+          25%,
+          50% {
+            opacity: 1;
+          }
+
+          75%,
+          to {
+            opacity: 0;
+          }
+        }
+
+        .star {
+          animation: star-anim 3s ease-in-out infinite;
+
+          @for $i from 1 to 5 {
+            &--#{$i} {
+              animation-delay: calc(-0.5s * #{$i});
+            }
+          }
+        }
+      }
+
+      &--toys {
+        @keyframes toy-anim {
+          from {
+            transform: rotate(6deg);
+          }
+
+          to {
+            transform: rotate(-6deg);
+          }
+        }
+
+        .toy {
+          animation: toy-anim 1s ease-in-out infinite alternate;
+
+          @for $i from 1 to 6 {
+            &--#{$i} {
+              animation-delay: calc(-0.1s * #{$i});
+            }
+          }
+          
+          &--1 {
+            transform-origin: 552px top;
+          }
+
+          &--2 {
+            transform-origin: 619px top;
+          }
+
+          &--3 {
+            transform-origin: 1665px top;
+          }
+
+          &--4 {
+            transform-origin: 1728px top;
+          }
+
+          &--5 {
+            transform-origin: 1187px top;
+          }
+        }
+      }
+    }
+  }
+
+  &__img {
+    position: relative;
+    object-position: center;
+    object-fit: none;
+    min-height: 620px;
+  }
+  &__desc {
+    color: #FFFFFF;
+    @include fontMontserrat(300);
+    position: absolute;
+    margin: 0 auto;
+    top: 42%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    max-width: 780px;
+    width: 100%;
+  }
+  &__title {
+    font-size: 22px;
+    line-height: 18px;
+    letter-spacing: 3px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    @media screen and (max-width: 1279px) {
+
+    }
+  }
+  &__subtitle {
+    @include fontMontserrat(200);
+    font-size: 65px;
+    font-weight: 200;
+    line-height: 75px;
+    letter-spacing: 3px;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+  }
+  &__text {
+    font-size: 18px;
+    line-height: 28px;
+  }
+}
